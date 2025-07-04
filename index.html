@@ -1,91 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clippy Coin Launch</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clippy Coin - Coming Soon</title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #0e0e0e;
-      color: #ffffff;
+      color: #f8f8f2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-    }
-    .container {
-      max-width: 800px;
-      width: 100%;
+      justify-content: center;
+      height: 100vh;
+      background: radial-gradient(circle at center, #1f1f1f 0%, #0e0e0e 100%);
       text-align: center;
     }
-    .logo {
-      width: 120px;
-      margin-bottom: 20px;
+    .container {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 600px;
+      box-shadow: 0 0 20px #00ffcc44;
     }
     h1 {
       font-size: 3em;
-      margin-bottom: 10px;
-      color: #4ade80;
+      margin-bottom: 0.5em;
     }
-    .token-address {
-      font-size: 1em;
-      background: #1f1f1f;
-      padding: 10px;
-      border-radius: 6px;
-      word-break: break-all;
+    p {
+      font-size: 1.2em;
+      margin-top: 0;
+    }
+    #countdown {
+      font-size: 2em;
+      margin: 20px 0;
+      color: #00ffcc;
+    }
+    img {
+      width: 120px;
       margin-bottom: 20px;
-      border: 1px solid #333;
     }
-    .buttons a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 20px;
-      background-color: #4ade80;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      transition: background-color 0.3s;
-    }
-    .buttons a:hover {
-      background-color: #22c55e;
-    }
-    iframe {
-      margin-top: 30px;
-      width: 100%;
-      height: 500px;
+    input[type="email"] {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
       border: none;
+      margin-right: 10px;
+      width: 60%;
     }
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #888;
+    button {
+      padding: 10px 15px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      background-color: #00ffcc;
+      color: #000;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="clippy-logo.png" alt="Clippy Logo" class="logo" />
-    <h1>Clippy Coin</h1>
-    <p class="token-address" id="token-address">
-      Token Address: YOUR_TOKEN_ADDRESS_HERE
-    </p>
-
-    <div class="buttons">
-      <a href="https://dexscreener.com/solana/YOUR_POOL_ADDRESS" target="_blank">View on Dexscreener</a>
-      <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=YOUR_TOKEN_ADDRESS" target="_blank">Buy Now</a>
-      <a href="https://phantom.app/" target="_blank">Add to Phantom Wallet</a>
-    </div>
-
-    <iframe src="https://dexscreener.com/solana/YOUR_POOL_ADDRESS/embed"></iframe>
-
-    <footer>
-      Launching July 23rd | Follow @ClippyCoin on X for updates
-    </footer>
+    <img src="https://i.imgur.com/9DW6G8e.png" alt="Clippy with hard hat">
+    <h1>🚧 Clippy Coin is Coming</h1>
+    <p>Launching July 23rd on Solana</p>
+    <div id="countdown"></div>
+    <p>Get notified when we launch:</p>
+    <form action="#" method="POST">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit">Notify Me</button>
+    </form>
   </div>
+
+  <script>
+    const countdown = () => {
+      const launchDate = new Date("2025-07-23T00:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = launchDate - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    countdown();
+    setInterval(countdown, 1000);
+  </script>
 </body>
 </html>
