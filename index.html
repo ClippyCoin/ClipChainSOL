@@ -6,6 +6,13 @@
   <title>Clippy Coin - Coming Soon</title>
   <meta name="google-site-verification" content="65WV5pSgKD_rDONOj1kbx3t9W9G13oAuM2BKQvDHfIo" />
 
+  <!-- HTTP to HTTPS Redirect -->
+  <script>
+    if (window.location.protocol === 'http:') {
+      window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+    }
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -93,11 +100,14 @@
     .social img {
       width: 64px;
       height: 64px;
-      object-fit: contain;
-      padding: 8px;
       border: 2px solid #00ffcc;
-      border-radius: 12px;
-      background-color: #0e0e0e;
+      border-radius: 10px;
+    }
+
+    .emoji-icon {
+      font-size: 48px;
+      display: inline-block;
+      line-height: 1;
     }
 
     .telegram-handle {
