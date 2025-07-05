@@ -14,19 +14,21 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       background: radial-gradient(circle at center, #1f1f1f 0%, #0e0e0e 100%);
       text-align: center;
+      padding: 20px;
     }
     .container {
       background: rgba(0, 0, 0, 0.8);
       padding: 40px;
       border-radius: 12px;
       max-width: 600px;
+      width: 100%;
       box-shadow: 0 0 20px #00ffcc44;
     }
     h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       margin-bottom: 0.5em;
     }
     p {
@@ -39,7 +41,7 @@
       color: #00ffcc;
     }
     img {
-      width: 120px;
+      width: 100px;
       margin-bottom: 20px;
     }
     input[type="email"] {
@@ -49,6 +51,7 @@
       border: none;
       margin-right: 10px;
       width: 60%;
+      max-width: 300px;
     }
     button {
       padding: 10px 15px;
@@ -59,6 +62,20 @@
       color: #000;
       cursor: pointer;
     }
+    .confirmation {
+      color: #00ffcc;
+      margin-top: 10px;
+      display: none;
+    }
+    .social {
+      margin-top: 30px;
+    }
+    .social a {
+      color: #00ffcc;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 1.5em;
+    }
   </style>
 </head>
 <body>
@@ -68,10 +85,16 @@
     <p>Launching July 23rd at 11:04 AM (CT)</p>
     <div id="countdown"></div>
     <p>Get notified when we launch:</p>
-    <form action="#" method="POST">
-      <input type="email" placeholder="Your email address" required>
+    <form id="notifyForm" action="https://formspree.io/f/xkgbagjd" method="POST">
+      <input type="email" name="email" placeholder="Your email address" required>
       <button type="submit">Notify Me</button>
     </form>
+    <div class="confirmation" id="confirmationMessage">✅ Thanks! You're on the list.</div>
+    <div class="social">
+      <a href="https://twitter.com" target="_blank" title="Twitter">🐦</a>
+      <a href="https://t.me" target="_blank" title="Telegram">📢</a>
+      <a href="https://discord.com" target="_blank" title="Discord">💬</a>
+    </div>
   </div>
 
   <script>
@@ -96,6 +119,23 @@
 
     countdown();
     setInterval(countdown, 1000);
+
+    document.getElementById("notifyForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          form.reset();
+          document.getElementById("confirmationMessage").style.display = "block";
+        }
+      });
+    });
   </script>
 </body>
 </html>
