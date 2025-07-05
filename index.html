@@ -70,16 +70,20 @@
     }
     .social {
       margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
     }
     .social a {
-      color: #00ffcc;
-      margin: 0 10px;
       text-decoration: none;
-      font-size: 1.5em;
     }
     .social img {
       width: 64px;
-      vertical-align: middle;
+      height: 64px;
+    }
+    .emoji-icon {
+      font-size: 48px;
     }
   </style>
 </head>
@@ -91,7 +95,72 @@
     <div id="countdown"></div>
 
     <p>Get notified when we launch:</p>
-    <form id="notifyForm" action=
+    <form id="notifyForm" action="https://formspree.io/f/xkgbagjd" method="POST">
+      <input type="email" name="email" placeholder="Your email address" required />
+      <button type="submit">Notify Me</button>
+    </form>
+    <div class="confirmation" id="confirmationMessage">✅ Thanks! You're on the list.</div>
+
+    <div class="social">
+      <a href="https://x.com/ClipChainSOL" target="_blank" title="Follow us on X">
+        <img src="https://github.com/ClippyCoin/ClipChainSOL/blob/main/Clippy%20X%20Logo.png?raw=true" alt="X logo" />
+      </a>
+      <a href="https://www.tiktok.com/@clipchain_sol" target="_blank" title="Follow us on TikTok">
+        <span class="emoji-icon">🎵</span>
+      </a>
+      <a href="https://t.me/ClipChainSOL" target="_blank" title="Join us on Telegram">
+        <span class="emoji-icon">📢</span>
+      </a>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <img src="https://cdn.jsdelivr.net/gh/yourcdn/clippy-assets@latest/telegram-qr.png" alt="Telegram QR" style="width: 200px; border-radius: 12px;" />
+      <p style="font-size: 1em; margin-top: 8px; color: #00ffcc;">@ClipChainSOL on Telegram</p>
+    </div>
+  </div>
+
+  <script>
+    const countdown = () => {
+      const launchDate = new Date("2025-07-23T16:04:04Z").getTime(); // UTC for 11:04:04 AM CT
+      const now = new Date().getTime();
+      const diff = launchDate - now;
+
+      if (diff < 0) {
+        document.getElementById("countdown").innerHTML = "🚀 Launching now!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    countdown();
+    setInterval(countdown, 1000);
+
+    document.getElementById("notifyForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: {
+          Accept: "application/json",
+        },
+      }).then((response) => {
+        if (response.ok) {
+          form.reset();
+          document.getElementById("confirmationMessage").style.display = "block";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
 
 
 
